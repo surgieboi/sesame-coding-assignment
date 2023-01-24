@@ -46,7 +46,7 @@ Using your copy and saved Alchemy, Discord, and Supabase keys, complete the foll
 1. Clone this repository
 2. Copy `.env.sample` and rename it to `.env`
 3. Update your environment variables file (`.env`) using your copy and saved key values
-4. Run `npm run dev`
+4. Run `npm install` and then `npm run dev`
 5. View your landing page on `localhost:3000`
 
 ### Deploying with Vercel (Optional)
