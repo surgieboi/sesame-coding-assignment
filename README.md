@@ -37,7 +37,7 @@ To connect to a server, verify an accounts membership, and use Discord's API, co
 4. Using OAuth2's URL Generator, create a URL using scopes (ie. `identify`, `email`, and `guilds`) and your previously created Generated URL (ex. `http://localhost:3000`)
 5. Copy and save your Application's Name and the generated OAuth2 URL
 
-Note, add your production URL to your Discord Application's Redirects and update your production environment variable on Vercel using this OAuth2 URL.
+Note, add your production URL to your Discord Application's Redirects and update your production environment variable on Vercel using this OAuth2 URL. Also, be sure that the URL's `response_type` equals `token` (ex. `response_type=token`).
 
 ### Step 4
 
