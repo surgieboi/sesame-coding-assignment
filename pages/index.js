@@ -21,9 +21,22 @@ export default function Index() {
 
   const { address, connector, isConnected } = useAccount()
   const { data: ensName } = useEnsName({ address })
-  const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
+  const { connect, connectors, error, isLoading, pendingConnector } = useConnect({
+    onMutate(connector) {
+      // console.log('Before Connect', connector)
+      isFetching(true)
+    },
+    onSuccess(data) {
+      // console.log('Connect', data)
+      setTimeout(() => {
+        isFetching(false)
+      }, 1000);
+    }
+  })
   const { disconnect } = useDisconnect()
   const [ hasMounted, setHasMounted] = useState(false)
+
+  const [ fetching, isFetching ] = useState(false)
 
   const [access, setAccess] = useState('')
   const [token, setToken] = useState('')
@@ -72,7 +85,7 @@ export default function Index() {
         isVerifying(false)
 
       })
-      .catch(console.error);
+      .catch(console.error)
   }
 
   const copyCoupon = async () => {
@@ -80,8 +93,8 @@ export default function Index() {
     navigator.clipboard.writeText(coupon)
     // console.log(sesame)
     setTimeout(() => {
-      isCopied(false);
-    }, 1500);
+      isCopied(false)
+    }, 1500)
   }
 
   useEffect(() => {
@@ -96,6 +109,8 @@ export default function Index() {
     setToken(tokenType)
 
   }, []);
+
+  if (fetching) return <><p style={{ display: 'block', width: '100%', marginTop: '180px', textAlign: 'center' }}>Loading...</p></>
 
   if (!hasMounted) return null;
 
