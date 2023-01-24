@@ -31,3 +31,6 @@ a {
   height: auto;
 }
 
+.invalid {
+  color: #FF0000;
+}

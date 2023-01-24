@@ -26,6 +26,10 @@ export default function Index() {
       // console.log('Before Connect', connector)
       isFetching(true)
     },
+    onError(error) {
+      // console.log('Error', error)
+      isFetching(false)
+    },
     onSuccess(data) {
       // console.log('Connect', data)
       setTimeout(() => {
