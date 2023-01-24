@@ -123,8 +123,8 @@ export default function Index() {
       <>
         <div className="w-full flex flex-col items-center mt-[210px] mb-[120px]">
 
-          <h1 className="mb-1 md:mb-2 text-3xl md:text-5xl font-bold text-center">Join our Discord</h1>
-          <h3 className="text-center mb-5 text-base">Confirm that you are a member on our server:</h3>
+          <h1 className="mb-1 md:mb-2 text-3xl md:text-5xl font-bold text-center">Get Your Rewards</h1>
+          <h3 className="text-center mb-5 text-base">Confirm that you are a member on our server to receive your coupon code:</h3>
 
           <button
             disabled={(access && token) || (sesame?.wallet && sesame?.is_verified) || connecting}
