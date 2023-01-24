@@ -53,7 +53,7 @@ Using your copy and saved Alchemy, Discord, and Supabase keys, complete the foll
 
 Optionally, this application can be deployed using Vercel's [Deploy Now](https://vercel.com/docs/deploy-button):
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsurgieboi%2Fnftport-nft-minting-starter-kit&env=NEXT_PUBLIC_NFTPORT_API_KEY,NEXT_PUBLIC_NFTPORT_MINTING_CHAIN,NEXT_PUBLIC_ALCHEMY_API_KEY"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsurgieboi%2Fsesame-coding-assignment&env=NEXT_PUBLIC_ALCHEMY_API_KEY,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,NEXT_PUBLIC_DISCORD_NAME,NEXT_PUBLIC_DISCORD_OAUTH2_URL"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
 
 Note, deploying to Vercel does not require any knowledge of Javascript, Next.js or software development; however, all required environment variables are needed to successfully deploy this application.
 
