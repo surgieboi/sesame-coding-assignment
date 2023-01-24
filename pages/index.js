@@ -94,11 +94,11 @@ export default function Index() {
 
   const copyCoupon = async () => {
     isCopied(true)
-    navigator.clipboard.writeText(coupon)
+    navigator.clipboard.writeText(coupon || sesame?.coupon_code)
     // console.log(sesame)
     setTimeout(() => {
       isCopied(false)
-    }, 1500)
+    }, 1500);
   }
 
   useEffect(() => {
@@ -173,7 +173,7 @@ export default function Index() {
           >
             {(coupon && !copied) || (sesame?.wallet && sesame?.is_connected && sesame?.is_verified && sesame?.coupon_code && !copied) ? (
               <>
-                {sesame?.coupon_code ? sesame?.coupon_code : coupon}
+                Coupon Code: {sesame?.coupon_code ? sesame?.coupon_code : coupon}
               </>
             ) : (coupon && copied) || (sesame?.wallet && sesame?.is_connected && sesame?.is_verified && sesame?.coupon_code && copied) ? (
               <>
