@@ -1,26 +1,97 @@
-# Sesame Coding Assignment
+# Discord and Wagmi oAuth Starter Kit
 
-### Build a Discord Questing Platform
+<img src="public/og.jpg">
 
-Welcome to Sesame’s coding challenge, in which you will build a Questing Platform ([https://bit.ly/sesame-coding](https://bit.ly/sesame-coding)) that rewards people with coupon codes for joining a Discord server.
+This repository contains a Next.JS application, using  Next.JS's [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and is deployable on [Vercel](https://vercel.com/); moreover, it is used to connect the application to MetaMask using [Wagmi](https://wagmi.sh/) and stores off-chain data into a [PostgreSQL](https://www.postgresql.org/) database using [Supabase](https://supabase.com/).
 
-**Product Requirements**
+## Getting Started
 
-- The user should be able to sign in on the webpage with their MetaMask wallet
-- Once they have connected their wallet, they will see a Quest which asks them to join a certain Discord server to win a coupon code. There will be a Join Discord button (that triggers the Discord joining flow) and a Verify button (that verifies if the user has successfully joined the specified Discord server).
-- Once the user successfully verifies that they have joined the Discord they should see a coupon code. For the purposes of this project, the coupon code can be a random 10 digit alphanumeric string.
-- The user’s state (whether they have verified, which coupon code they have received, etc) should be stored in a DB so that it persists if the user signs in with their wallet again or even on server restart. Multiple different users should be able to use this product at the same time.
-- The Quest details (title, description, cover image uri, discord server name, etc) and any API keys (discord, etc) should be easily settable in a .config OR .env file
-- The UI is not the primary focus of this assignment however it needs to be good enough and fully functional. Here is roughly how it should look like: [https://bit.ly/sesame-coding](https://bit.ly/sesame-coding)
+### Step 1
 
-**References**
+Wagmi requires an infrastructure provider for connecting Web3 wallets to this applicaton (ie. MetaMask). 
 
-- Quest3 ([https://app.quest3.xyz/quest/691059696896696692](https://app.quest3.xyz/quest/691059696896696692)) can be used for reference for how the Join Discord flow and the verification should work. Feel free to use that as reference when designing your solution.
+To leverage Wagmi, complete the following steps:
 
-**Directions**
+1. [Sign-up](https://www.alchemy.com/) and create an Alchemy account
+2. Create an app
+3. Copy and save the app's API key
 
-- Take about 8 hours to work on this assignment. Please complete this exercise yourself, however feel free to Google and use other references.
-- Please fork this repository to start working on this project. Add a detailed README that provides easily understandable instructions on how to run your code on local machine.
-- This will be followed by a 45 min interview where you will be asked to explain your decisions and asked to describe about challenges and opportunities with your solution
-- In addition to correctness, we will be evaluating based on code structure, readability, and extensibility. It does not need to be over-engineered, however should be solid production level code.
-- Please reach out if you have any questions.
+### Step 2
+
+For managing application-specific data off-chain (ex. MetaMask wallet address), we use Supabase.
+
+To use Supabase, complete the following steps:
+
+1. [Sign-up](https://supabase.com/) and create a Supabase account
+2. Create a project
+3. Copy and sve your Project's API Key and URL from your Supabase account's project settings
+4. Complete [Database Configuration](#database-configuration)
+
+### Step 3
+
+To connect to a server, verify an accounts membership, and use Discord's API, complete the following steps:
+
+1. [Sign-up](https://discord.com/developers/) or log into Discord Developers
+2. Create an application
+3. Update your OAuth2 settings; specifically: redirects (ex. `http://localhost:3000`)
+4. Using OAuth2's URL Generator, create a URL using scopes (ie. `identify`, `email`, and `guilds`) and your previously created Generated URL (ex. `http://localhost:3000`)
+5. Copy and save your Application's Name and the generated OAuth2 URL
+
+### Step 4
+
+Using your copy and saved Alchemy, Discord, and Supabase keys, complete the following steps to run this application:
+
+1. Clone this repository
+2. Copy `.env.sample` and rename it to `.env`
+3. Update your environment variables file (`.env`) using your copy and saved key values
+4. Run `npm run dev`
+5. View your landing page on `localhost:3000`
+
+### Deploying with Vercel (Optional)
+
+Optionally, this application can be deployed using Vercel's [Deploy Now](https://vercel.com/docs/deploy-button):
+
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsurgieboi%2Fnftport-nft-minting-starter-kit&env=NEXT_PUBLIC_NFTPORT_API_KEY,NEXT_PUBLIC_NFTPORT_MINTING_CHAIN,NEXT_PUBLIC_ALCHEMY_API_KEY"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+
+Note, deploying to Vercel does not require any knowledge of Javascript, Next.js or software development; however, all required environment variables are needed to successfully deploy this application.
+
+## Environment Variables
+
+The list of environment variables needed to run this application:
+
+| Variable        | Description           | Example  |
+| ------------- |-------------| -------------|
+| NEXT_PUBLIC_ALCHEMY_API_KEY      | Alchemy API Key      |   `JHrf267hpy2bGYwznCRLLmqjM8OiZwud` |
+| NEXT_PUBLIC_SUPABASE_URL      | Supabase Project URL      |   `https://jqjacvbfijzddisqeapw.supabase.co` |
+| NEXT_PUBLIC_SUPABASE_ANON_KEY     | Supabase Project API Key      |   `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxamFjdmJmaWp6ZGRpc3FlcW13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ1ODM2NTIsImV4cCI6MTk5MDE1OTY1Mn0.UrJ16g55euh8mRftMIyt7pv4hj0SYGZKwGbUHj2I9oP` |
+| NEXT_PUBLIC_DISCORD_NAME      | Discord Application Name      |   `Sesame` |
+| NEXT_PUBLIC_DISCORD_OAUTH2_URL      | Discord Application OAuth2 URL      |   `https://discord.com/api/oauth2/authorize?client_id=1067253927890975117&redirect_uri=http%3A%2F%2Flocalhost%3A3000&response_type=token&scope=identify%20email%20guilds` |
+
+## Database Configuration
+
+To store data off-chain (ex. MetaMask wallet address), complete the following database configurations:
+
+### Create Wallets Table
+
+Create a table for storing connected wallet data using the following schema:
+
+| Name        | Type           | Default Value  | Is Nullable   | Is Unique   |
+| ------------- |-------------| -------------| -------------| -------------|
+| wallet        | text           | Empty or Null  | false  | true   |
+| is_connected        | boolean           | false | false  | false   |
+| is_verified        | boolean           | false | false  | false   |
+| coupon_code        | text           | Empty or Null | true  | false   |
+
+Note, ensure that Row Level Security (RLS) is enabled.
+
+### Update Table Policy
+
+In order to read and write data, create a database table Policy from your Supabase project's Authentication page (ex. `https://app.supabase.com/project/<YOUR_PROJECT_ID>/auth/policies`).
+
+## Contributing
+
+Feel free to fork, submit pull requests and contribute.
+
+## Questions
+
+If you have any questions, feel free to email me at: [sergio.m.villasenor@gmail.com](mailto:sergio.m.villasenor@gmail.com).
